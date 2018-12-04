@@ -3,7 +3,7 @@
 " Author : thinca <thinca+vim@gmail.com>
 " License: zlib License
 
-if exists('g:loaded_fontzoom') || !has('gui_running')
+if exists('g:loaded_fontzoom') || (!has('gui_running') && !has('nvim'))
   finish
 endif
 let g:loaded_fontzoom = 1
@@ -43,7 +43,7 @@ endfunction
 if !exists('g:fontzoom_pattern')
   " TODO: X11 is not tested because I do not have the environment.
   let g:fontzoom_pattern =
-  \   has('win32')   || has('win64') ||
+  \   has('win32')   || has('win64') || has('nvim') ||
   \   has('mac')     || has('macunix') ? ':h\zs\d\+':
   \   has('gui_gtk') || has('gui_qt')  ? '\s\+\zs\d\+$':
   \   has('X11')                       ? '\v%([^-]*-){6}\zs\d+\ze%(-[^-]*){7}':
